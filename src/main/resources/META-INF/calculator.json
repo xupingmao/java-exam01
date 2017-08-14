@@ -1,0 +1,36 @@
+{
+  "global": {
+    "nightStart": "23:00:00",
+    "nightEnd": "06:00:00"
+  },
+  "configurations": {
+    "DOWNTOWN": {
+      "day": {
+        "initialPrice":14,
+        "initialDistance":3,
+        "distanceRange":[3,10],
+        "priceRange":[2.5,3.5]
+      },
+      "night": {
+        "initialPrice":18,
+        "initialDistance":3,
+        "distanceRange":[3,10],
+        "priceRange":[3,4.5]
+      }
+    },
+    "SUBURB": {
+      "day": {
+        "initialPrice":14,
+        "initialDistance":3,
+        "distanceRange":[3],
+        "priceRange":[2.5]
+      },
+      "night": {
+        "initialPrice":18,
+        "initialDistance":3,
+        "distanceRange":[3],
+        "priceRange":[3]
+      }
+    }
+  }
+}
