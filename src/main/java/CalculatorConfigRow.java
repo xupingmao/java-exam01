@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by xupingmao on 2017/8/14.
  */
-public class CalculatorConfiguration {
+public class CalculatorConfigRow {
 
     private LocalTime nightStart;
     private LocalTime nightEnd;
