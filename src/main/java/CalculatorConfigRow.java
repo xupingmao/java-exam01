@@ -13,6 +13,8 @@ public class CalculatorConfigRow {
     private LocalTime nightEnd;
     private String area;
     private String period;
+    private BigDecimal initialPrice;
+    private BigDecimal initialDistance;
     private List<BigDecimal> distanceRange = Lists.newArrayList();
     private List<BigDecimal> priceRange = Lists.newArrayList();
 
@@ -62,5 +64,21 @@ public class CalculatorConfigRow {
 
     public void setPriceRange(List<BigDecimal> priceRange) {
         this.priceRange = priceRange;
+    }
+
+    public BigDecimal getInitialPrice() {
+        return initialPrice;
+    }
+
+    public void setInitialPrice(BigDecimal initialPrice) {
+        this.initialPrice = initialPrice;
+    }
+
+    public BigDecimal getInitialDistance() {
+        return initialDistance;
+    }
+
+    public void setInitialDistance(BigDecimal initialDistance) {
+        this.initialDistance = initialDistance;
     }
 }

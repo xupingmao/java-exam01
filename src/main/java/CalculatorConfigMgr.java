@@ -55,6 +55,17 @@ public class CalculatorConfigMgr {
             }
             row.setNightStart(nightStart);
             row.setNightEnd(nightEnd);
+            // 处理精度
+            row.setInitialDistance(NumberUtils.round(row.getInitialDistance()));
+            row.setInitialPrice(NumberUtils.round(row.getInitialPrice()));
+
+            for (int i = 0; i < row.getDistanceRange().size(); i++) {
+                BigDecimal step = row.getDistanceRange().get(i);
+                BigDecimal price = row.getPriceRange().get(i);
+
+                row.getDistanceRange().set(i, NumberUtils.round(step));
+                row.getPriceRange().set(i, NumberUtils.round(price));
+            }
             configRows.add(row);
         }
     }
@@ -69,11 +80,25 @@ public class CalculatorConfigMgr {
         return null;
     }
 
-    private String getPeriod(LocalTime localTime) {
-        if (!localTime.isBefore(nightStart) && localTime.isBefore(nightEnd)) {
-            return "night";
+    public boolean isBetween(LocalTime target, LocalTime start, LocalTime end) {
+        // 左包含又不包含
+        return target.compareTo(start) >= 0 && target.compareTo(end) < 0;
+    }
+
+    public String getPeriod(LocalTime localTime) {
+        if (nightStart.isBefore(nightEnd)) {
+            if (isBetween(localTime, nightStart, nightEnd)) {
+                return "night";
+            } else {
+                return "day";
+            }
         } else {
-            return "day";
+            if (isBetween(localTime, nightEnd, nightStart)) {
+                // 在夜间范围之外
+                return "day";
+            } else {
+                return "night";
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ import com.google.common.base.Preconditions;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by xupingmao on 2017/8/14.
@@ -26,7 +27,33 @@ public class CalculatorImpl implements Calculator {
         CalculatorConfigRow config = calculatorConfigMgr.getConfig(request.getArea(), request.getTime());
         Preconditions.checkState(config != null, "no matching config");
 
-        System.out.println(JSON.toJSONString(config, true));
-        return null;
+        if (request.getDistance().compareTo(config.getInitialDistance()) <= 0) {
+            // 起步价
+            return NumberUtils.round(config.getInitialPrice());
+        }
+
+        BigDecimal total = NumberUtils.round(BigDecimal.ZERO);
+        total = total.add(config.getInitialPrice());
+        BigDecimal distance = NumberUtils.round(request.getDistance());
+
+        for (int i = 0; i < config.getDistanceRange().size(); i++) {
+            BigDecimal start = config.getDistanceRange().get(i);
+            BigDecimal price = config.getPriceRange().get(i);
+            if (i+1 < config.getDistanceRange().size()) {
+                BigDecimal end = config.getDistanceRange().get(i+1);
+                if (distance.compareTo(end) <= 0) {
+                    BigDecimal sum = distance.subtract(start).multiply(price);
+                    total = total.add(sum);
+                    break;
+                } else {
+                    BigDecimal sum = end.subtract(start).multiply(price);
+                    total = total.add(sum);
+                }
+            } else {
+                BigDecimal sum = request.getDistance().subtract(start).multiply(price);
+                total = total.add(sum);
+            }
+        }
+        return NumberUtils.round(total);
     }
 }
