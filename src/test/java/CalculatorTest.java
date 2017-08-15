@@ -88,8 +88,8 @@ public class CalculatorTest {
         calculatePrice("21.00", AreaEnum.DOWNTOWN, new LocalTime(1,0), 4);
 
         // 超过10公里
-        // 18 + 3 * 7 + 2 * 4.5
-        calculatePrice("48.00", AreaEnum.DOWNTOWN, new LocalTime(5,59), 12);
+        // 18 + 3 * 7 + 2 * 4.7
+        calculatePrice("48.40", AreaEnum.DOWNTOWN, new LocalTime(5,59), 12);
     }
 
     @Test
