@@ -92,4 +92,36 @@ public class CalculatorTest {
         calculatePrice("48.00", AreaEnum.DOWNTOWN, new LocalTime(5,59), 12);
     }
 
+    @Test
+    public void suburbDay() {
+        // 起步价
+        calculatePrice("14.00", AreaEnum.SUBURB, new LocalTime(6,0), 2);
+
+        // 14 + 2.5 * 0.5
+        calculatePrice("15.25", AreaEnum.SUBURB, new LocalTime(7,0), 3.5);
+
+        // 14 + 2.5 * 1
+        calculatePrice("16.50", AreaEnum.SUBURB, new LocalTime(8,0), 4);
+
+        // 超过10公里
+        // 14 + 2.5 * 9
+        calculatePrice("36.50", AreaEnum.SUBURB, new LocalTime(22,59), 12);
+    }
+
+    @Test
+    public void suburbNight() {
+        // 起步价
+        calculatePrice("18.00", AreaEnum.SUBURB, new LocalTime(23,0), 2);
+
+        // 18 + 3 * 0.5
+        calculatePrice("19.50", AreaEnum.SUBURB, new LocalTime(0,0), 3.5);
+
+        // 18 + 3 * 1
+        calculatePrice("21.00", AreaEnum.SUBURB, new LocalTime(1,0), 4);
+
+        // 超过10公里
+        // 18 + 3 * 9
+        calculatePrice("45.00", AreaEnum.SUBURB, new LocalTime(5,59), 12);
+    }
+
 }

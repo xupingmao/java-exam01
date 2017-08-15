@@ -41,8 +41,8 @@ public class CalculatorConfigMgrTest {
         Assert.assertNotNull(config);
         Assert.assertEquals(AreaEnum.DOWNTOWN.name(), config.getArea());
         Assert.assertEquals("day", config.getPeriod());
-        Assert.assertEquals(BigDecimal.valueOf(3), config.getInitialDistance());
-        Assert.assertEquals(BigDecimal.valueOf(14), config.getInitialPrice());
+        Assert.assertEquals("3.00", config.getInitialDistance().toString());
+        Assert.assertEquals("14.00", config.getInitialPrice().toString());
         Assert.assertEquals("06:00:00", config.getNightEnd().toString("HH:mm:ss"));
         Assert.assertEquals("23:00:00", config.getNightStart().toString("HH:mm:ss"));
     }
